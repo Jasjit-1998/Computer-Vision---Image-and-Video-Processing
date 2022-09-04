@@ -14,8 +14,7 @@ video = cv2.VideoCapture(0)
 # Cheating a variable outsid the while loop
 
 
-a=1
-
+a=0
 while True:
     a=a+1
     check, frame = video.read()
@@ -32,7 +31,7 @@ while True:
     if key ==ord('q'):
         break
 
-print(a)    
+print(a)
 
 
 video.release()

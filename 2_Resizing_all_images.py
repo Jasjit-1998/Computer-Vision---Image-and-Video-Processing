@@ -1,6 +1,7 @@
 import cv2
 import glob
 
+# Glob library finds the path name of the file
 images=glob.glob("*.jpg")
 
 for image in images:
