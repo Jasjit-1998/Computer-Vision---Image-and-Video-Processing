@@ -19,7 +19,7 @@ while True:
 
     #time.sleep(3)    # Holding the script for 3 seconds
     cv2.imshow("Capturing", gray)
-    key=cv2.waitKey(2000)
+    key=cv2.waitKey(1)    
 
 # If statement will break the while loop when 'q' key is pressed
     if key ==ord('q'):
