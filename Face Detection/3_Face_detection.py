@@ -24,7 +24,18 @@ minNeighbors = 5)
 print(type(faces))
 print(faces)
 
-cv2.imshow("gray", gray_img)
+# Drawing the rectangle accross the face -:
+for x,y,w,h in faces:
+    #<SYNTAX> img = cv2.rectangle(img, starting point,end point (along the diagnol), color, width of rec)
+    img = cv2.rectangle(img, (x,y),(x+w,y+h), (0,255,0), 3)
+
+
+
+cv2.imshow("gray", img)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+
+# Summary - : We first convert the image to the GRAY scale
+# Then using image detection classifier we we detect the face and then draw the rectangle on the original face
