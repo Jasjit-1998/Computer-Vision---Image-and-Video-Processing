@@ -21,17 +21,20 @@ faces = face_cascade.detectMultiScale(gray_img,
 scaleFactor = 1.05,
 minNeighbors = 5)
 
-print(type(faces))
-print(faces)
+
 
 # Drawing the rectangle accross the face -:
 for x,y,w,h in faces:
     #<SYNTAX> img = cv2.rectangle(img, starting point,end point (along the diagnol), color, width of rec)
     img = cv2.rectangle(img, (x,y),(x+w,y+h), (0,255,0), 3)
 
+print(type(faces))
+print(faces)
 
+# resized = cv2.resize(img,(500,500))   Rather than putting the value it is suggested to extend the shape of the image
+resized = cv2.resize(img,(int(img.shape[1]/3), int(img.shape[0]/3)))
 
-cv2.imshow("gray", img)
+cv2.imshow("gray", resized)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
