@@ -10,17 +10,22 @@ import cv2, time
 
 video = cv2.VideoCapture(0)
 
-check, frame = video.read()
-print(check)
-print(frame)
+while True:
+    check, frame = video.read()
+    print(check)
+    print(frame)
 
-gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-time.sleep(3)    # Holding the script for 3 seconds
-cv2.imshow("Capturing", gray)
+    #time.sleep(3)    # Holding the script for 3 seconds
+    cv2.imshow("Capturing", gray)
+    key=cv2.waitKey(2000)
+
+# If statement will break the while loop when 'q' key is pressed
+    if key ==ord('q'):
+        break
 
 
-cv2.waitKey(0)
 video.release()
 cv2.detroyAllWindows()
 
