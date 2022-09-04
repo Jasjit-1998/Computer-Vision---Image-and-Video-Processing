@@ -8,9 +8,12 @@ img = cv2.imread("galaxy.jpg",1)
 print(type(img))
 print(img.shape)
 
+# Resizing the Image
+resize_image = cv2.resize(img, (1000,500))
+
 # Displaying the image on the window
 # <SYNTAX> cv2.imshow("<Windows name>", <imgage variable>)
-cv2.imshow("Galaxy", img)
+cv2.imshow("Galaxy", resize_image)
 # Waitkey
 # 0 --> if user press any button it will close the window
 # Or we can also add the timme
