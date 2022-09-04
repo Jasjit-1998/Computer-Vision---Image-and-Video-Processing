@@ -10,7 +10,14 @@ import cv2, time
 
 video = cv2.VideoCapture(0)
 
+# Checking how many frames being generated
+# Cheating a variable outsid the while loop
+
+
+a=1
+
 while True:
+    a=a+1
     check, frame = video.read()
     print(check)
     print(frame)
@@ -19,11 +26,13 @@ while True:
 
     #time.sleep(3)    # Holding the script for 3 seconds
     cv2.imshow("Capturing", gray)
-    key=cv2.waitKey(1)    
+    key=cv2.waitKey(1)
 
 # If statement will break the while loop when 'q' key is pressed
     if key ==ord('q'):
         break
+
+print(a)    
 
 
 video.release()
