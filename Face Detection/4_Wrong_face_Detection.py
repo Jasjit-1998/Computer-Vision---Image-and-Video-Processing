@@ -12,13 +12,13 @@ import cv2
 face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
 # USing the gray scale image we can have better image detection
-img = cv2.imread(".\Face Detection\news.jpg")
+img = cv2.imread("news.jpg")
 
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # Creating face object to store width and height of the object
 faces = face_cascade.detectMultiScale(gray_img,
-scaleFactor = 1.05,
+scaleFactor = 1.1,
 minNeighbors = 5)
 
 
