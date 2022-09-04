@@ -16,6 +16,14 @@ img = cv2.imread(".\Face Detection\photo.jpg")
 
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+# Creating face object to store width and height of the object
+faces = face_cascade.detectMultiScale(gray_img,
+scaleFactor = 1.05,
+minNeighbors = 5)
+
+print(type(faces))
+print(faces)
+
 cv2.imshow("gray", gray_img)
 
 cv2.waitKey(0)
