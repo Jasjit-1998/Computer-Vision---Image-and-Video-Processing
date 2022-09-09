@@ -74,10 +74,14 @@ while True:
     #print(gray)
 
     if key == ord('q'):
+
+        if status ==1:
+            times.append(datetime.now())
         break
 
 print(status_list)   # Printing status list outside the while loop
 print(times)
+
         #cv2.imshow("delta_frame",delta_frame)
 
     #time.sleep(3)    # Holding the script for 3 seconds
