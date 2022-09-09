@@ -27,29 +27,30 @@ while True:
     gray=cv2.GaussianBlur(gray,(21,21),0)
 # Link - https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html
 
-
-
-
     if first_frame is None:
         first_frame = gray         # We will get the first frame in the numpy array
         continue
 
         # When the object appear in the frame then above if condition will be false
         # Comparing the diffrence between the current frame and the delta frames
-        delta_frame = cv2.absdiff(first_frame,gray)
+    delta_frame = cv2.absdiff(first_frame,gray)
 
 
-        cv2.imshow("Gray Frame", gray)
+    cv2.imshow("Gray Frame", gray)
+    cv2.imshow("DeltaFrame", delta_frame)
+    key=cv2.waitKey(1)
+    print(gray)
+
+    if key == ord('q'):
+        break
         #cv2.imshow("delta_frame",delta_frame)
 
     #time.sleep(3)    # Holding the script for 3 seconds
 
-    key=cv2.waitKey(1)
-    print(gray)q
+
 
 # If statement will break the while loop when 'q' key is pressed
-    if key ==ord('q'):
-        break
+
 
 video.release()
 cv2.detroyAllWindows()
