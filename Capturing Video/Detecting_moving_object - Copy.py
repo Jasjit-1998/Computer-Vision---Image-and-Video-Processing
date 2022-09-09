@@ -38,12 +38,25 @@ while True:
     thresh_delta = cv2.threshold(delta_frame, 30, 255, cv2.THRESH_BINARY)[1]     # Accesing second item of the tuple as we are using the threshold binary
     thresh_frame = cv2.dilate(thresh_delta, None, iterations = 2)   # Smoothning of the threshold
 
+# Finding the Countour   (Soring the countour in the Tupil)
+# Checking the Area of the countour
+    # <SYNTAX> = (cnts,_) = cv2.findCountours(thresh_frame.copy(), cv2.RETR_EXTERNAL (external Countour retrival), cv2.CHAIN_APPROX_SIMPLE(approximation method used by the open cv))
+    (cnts,_) = cv2.findContours(thresh_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+    for contour in cnts:
+        if cv2.contourArea(contour) < 1000:
+            continue
+
+   # If countour is greater than 1000 pixel then we have to draw the rectangle arounf that frame
+   # Perameters defining the rectangle
+        (x, y, w, h) = cv2.boundingRect(contour) # Creating the rectagle
+        cv2.rectangle(frame, (x,y), (x+w, y+w), (0,255,0), 3)  # Drawing the rectangle on the frame
 
 
     cv2.imshow("Gray Frame", gray)
     cv2.imshow("DeltaFrame", delta_frame)
     cv2.imshow("Threshold Frame", thresh_frame)
+    cv2.imshow("Color Frame", frame)
 
     key=cv2.waitKey(1)
     print(gray)
