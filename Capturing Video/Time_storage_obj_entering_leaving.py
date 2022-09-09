@@ -3,17 +3,20 @@
 
 
 
-import cv2, time
+import cv2, time, pandas
 from datetime import datetime
 
 video = cv2.VideoCapture(0)
 
 # Checking how many frames being generated
 # Cheating a variable outsid the while loop
+# Initialization section
 
 first_frame = None
 status_list = [None, None]      # Adding the 2 items into the list otherwise the errorn will occur
 times = []
+# Initializing dandas frame to read the date and the columns
+df = pandas.DataFrame(columns = ["Start", "End"])
 
 while True:
 
@@ -37,7 +40,7 @@ while True:
     thresh_frame = cv2.dilate(thresh_delta, None, iterations = 2)   # Smoothning of the threshold
 
 # Finding the Countour   (Soring the countour in the Tupil)
-# Checking the Area of the countour
+# Checking the Area ofq the countour
     # <SYNTAX> = (cnts,_) = cv2.findCountours(thresh_frame.copy(), cv2.RETR_EXTERNAL (external Countour retrival), cv2.CHAIN_APPROX_SIMPLE(approximation method used by the open cv))
     (cnts,_) = cv2.findContours(thresh_frame.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -53,6 +56,8 @@ while True:
         cv2.rectangle(frame, (x,y), (x+w, y+w), (0,255,0), 3)  # Drawing the rectangle on the frame
 
     status_list.append(status)    # Printing the status list outside the while loop
+
+    status_list = status_list[-2:]    # Addin only the last 2 items # Reduce the memory
 
 # Checking the last 2 items of the list [0,1]   Status changes from 0 to 1 or 1 to 0
 
@@ -76,21 +81,24 @@ while True:
     if key == ord('q'):
 
         if status ==1:
-            times.append(datetime.now())
+            times.append(datetime.now())   # when the sttaus is 1 and the window is closed then it will record the time of the window
         break
 
 print(status_list)   # Printing status list outside the while loop
 print(times)
 
+for i in range(0,len(times),2):
+    df = df.append({"Start": times[i], "End":times[i+1]}, ignore_index = True)
         #cv2.imshow("delta_frame",delta_frame)
 
+df.to_csv("Times.csv")
     #time.sleep(3)    # Holding the script for 3 seconds
 
 
 
 # If statement will break the while loop when 'q' key is pressed
 video.release()
-cv2.detroyAllWindows()
+cv2.destroyAllWindows()
 
 
 # Creating the frame object which will read video of that Object
