@@ -11,6 +11,7 @@ video = cv2.VideoCapture(0)
 # Cheating a variable outsid the while loop
 
 first_frame = None
+status_list = []
 
 
 while True:
@@ -50,6 +51,7 @@ while True:
         (x, y, w, h) = cv2.boundingRect(contour) # Creating the rectagle
         cv2.rectangle(frame, (x,y), (x+w, y+w), (0,255,0), 3)  # Drawing the rectangle on the frame
 
+    status_list.append(status)    # Printing the status list outside the while loop
 
     cv2.imshow("Gray Frame", gray)
     cv2.imshow("DeltaFrame", delta_frame)
@@ -62,7 +64,7 @@ while True:
     if key == ord('q'):
         break
 
-    print(status)
+print(status_list)   # Printing status list outside the while loop
 
         #cv2.imshow("delta_frame",delta_frame)
 
@@ -71,8 +73,6 @@ while True:
 
 
 # If statement will break the while loop when 'q' key is pressed
-
-
 video.release()
 cv2.detroyAllWindows()
 
