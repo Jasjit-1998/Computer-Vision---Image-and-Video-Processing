@@ -36,13 +36,14 @@ while True:
     delta_frame = cv2.absdiff(first_frame,gray)
     # <SYNTAX>.thresh_delta = cv2.threshold(delta_frame, diffrence between frames , 255, cv.THRESH_BINARY)
     thresh_delta = cv2.threshold(delta_frame, 30, 255, cv2.THRESH_BINARY)[1]     # Accesing second item of the tuple as we are using the threshold binary
+    thresh_frame = cv2.dilate(thresh_delta, None, iterations = 2)   # Smoothning of the threshold
 
 
 
 
     cv2.imshow("Gray Frame", gray)
     cv2.imshow("DeltaFrame", delta_frame)
-    cv2.imshow("Threshold Frame", thresh_delta)
+    cv2.imshow("Threshold Frame", thresh_frame)
 
     key=cv2.waitKey(1)
     print(gray)
