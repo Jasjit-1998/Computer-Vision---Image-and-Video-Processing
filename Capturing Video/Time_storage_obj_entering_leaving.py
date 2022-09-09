@@ -4,6 +4,7 @@
 
 
 import cv2, time
+from datetime import datetime
 
 video = cv2.VideoCapture(0)
 
@@ -11,8 +12,8 @@ video = cv2.VideoCapture(0)
 # Cheating a variable outsid the while loop
 
 first_frame = None
-status_list = []
-
+status_list = [None, None]      # Adding the 2 items into the list otherwise the errorn will occur
+times = []
 
 while True:
 
@@ -53,6 +54,17 @@ while True:
 
     status_list.append(status)    # Printing the status list outside the while loop
 
+# Checking the last 2 items of the list [0,1]   Status changes from 0 to 1 or 1 to 0
+
+# Recording the time whien the status change from 1 to 0
+    if status_list[-1] ==1 and status_list[-2] ==0:
+        times.append(datetime.now())
+        # We need to record the date and time of the event in the list
+
+# When the status change from p to 1
+    if status_list[-1] ==0 and status_list[-2] ==1:
+        times.append(datetime.now())
+
     cv2.imshow("Gray Frame", gray)
     cv2.imshow("DeltaFrame", delta_frame)
     cv2.imshow("Threshold Frame", thresh_frame)
@@ -65,7 +77,7 @@ while True:
         break
 
 print(status_list)   # Printing status list outside the while loop
-
+print(times)
         #cv2.imshow("delta_frame",delta_frame)
 
     #time.sleep(3)    # Holding the script for 3 seconds
